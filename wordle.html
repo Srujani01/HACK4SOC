@@ -128,6 +128,9 @@
     }
     attemptsHistory.push({ guess: guess, feedback: feedback });
     displayAttempts();
+    if (guess === targetWord) {
+      addPoints();
+    }
   }
 
   function displayAttempts() {
@@ -167,6 +170,20 @@
       alert(`You ran out of attempts. The word was: ${targetWord}.`);
       location.reload(); // Reload the page for a new game
     }
+  }
+
+  function addPoints() {
+    // Add 10 points to the points page
+    if (localStorage.getItem('points')) {
+      let currentPoints = parseInt(localStorage.getItem('points'));
+      currentPoints += 10;
+      localStorage.setItem('points', currentPoints.toString());
+    } else {
+      localStorage.setItem('points', '10');
+    }
+    alert('You earned 10 points!');
+    // Redirect to the points page
+    window.location.href = 'points.html';
   }
 
   initializeWordle();
