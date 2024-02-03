@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinQuest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .top-links {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .top-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        nav {
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .content {
+            margin-top: 20px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        aside {
+            flex-basis: 30%;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .fact-container {
+            flex-basis: 65%;
+            background-color: #f9d4d4; /* Light pink background color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .fact-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .fact-text {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .know-more-button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .know-more-button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Fin Quest</h1>
+        <div class="top-links">
+            <a href="wordle.html"><i class="fas fa-gamepad"></i> Wordle</a>
+            <a href="signup.html"><i class="fas fa-user-plus"></i> Signup</a>
+            <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+        </div>
+    </header>
+    <!-- <nav>
+        <ul>
+            <li><a href="wordle.html">wordle</a></li>
+            <li><a href="signup.html">Signup</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav> -->
+    <div class="content">
+        <aside>
+            <h3>Menu</h3>
+            <ul>
+                <li><a href="#">Courses</a></li>
+                <!-- Add more menu items here -->
+            </ul>
+        </aside>
+        <div class="fact-container">
+            <h2>Fact of the Day</h2>
+            <p class="fact-text" id="fact-text">Loading...</p>
+            <button class="know-more-button" onclick="openMoreInfo()">Know More</button>
+        </div>
+    </div>
+    <footer>
+    </footer>
+
+    <script>
+        // Financial facts array
+        const financialFacts = [
+            {
+                fact: "The New York Stock Exchange (NYSE) is the largest stock exchange in the world by market capitalization.",
+                link: "https://www.nyse.com"
+            },
+            {
+                fact: "The concept of insurance dates back to ancient civilizations such as Babylonians, Greeks, and Romans.",
+                link: "https://en.wikipedia.org/wiki/History_of_insurance"
+            },
+            {
+                fact: "The first credit card was introduced in 1950 by Diners Club, allowing consumers to pay for their purchases with a card rather than cash.",
+                link: "https://www.history.com/topics/inventions/history-of-credit-cards"
+            },
+            {
+                fact: "The United States dollar ($) is the most widely used currency in the world and is known as the world's primary reserve currency.",
+                link: "https://www.federalreserve.gov/faqs/currency_12770.htm"
+            }
+        ];
+
+        // Function to display a random financial fact
+        function displayFact() {
+            const randomIndex = Math.floor(Math.random() * financialFacts.length);
+            const factText = document.getElementById("fact-text");
+            factText.textContent = financialFacts[randomIndex].fact;
+            factText.dataset.link = financialFacts[randomIndex].link; // Store link as data attribute
+        }
+
+        // Open more info link
+        function openMoreInfo() {
+            const factText = document.getElementById("fact-text");
+            const link = factText.dataset.link;
+            if (link) {
+                window.open(link, "_blank"); // Open link in a new tab
+            }
+        }
+
+        // Display a random financial fact when the page loads
+        displayFact();
+    </script>
+</body>
+
+</html>
