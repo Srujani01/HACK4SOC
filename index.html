@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Form</title>
+</head>
+<body>
+
+<div>
+    <h2>Submit Data</h2>
+    <form id="dataForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" autocomplete="off" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" autocomplete="off" required>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" autocomplete="off" required>
+        </div>
+
+        <button type="button" onclick="submitData()">Submit</button>
+    </form>
+</div>
+
+<script>
+    function submitData() {
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var age = document.getElementById('age').value;
+
+        // Create an object with form data
+        var formData = {
+            name: name,
+            email: email,
+            age: age
+        };
+
+        // Send the data to the server using AJAX (in this case, using Fetch API)
+        fetch('/submit_data', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+})
+.then(response => response.json())
+.then(data => {
+    if (data.message) {
+        alert(data.message);
+        // Optionally, you can redirect or perform other actions based on the server's response
+    } else {
+        console.error('Invalid response from the server:', data);
+    }
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+
+    }
+</script>
+
+</body>
+</html>
