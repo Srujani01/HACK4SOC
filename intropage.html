@@ -124,6 +124,47 @@
     font-size: 48px;
     color: #ff6384;
   }
+  .saving-goals-container {
+    flex-basis: 30%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .saving-goals-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .saving-goals-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .saving-goals-input {
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 80%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .saving-goals-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .saving-goals-button:hover {
+    background-color: #555;
+  }
 </style>
 </head>
 <body>
@@ -144,25 +185,22 @@
     <li><a href="quizft.html">Quiz</a></li>
     <li><a href="points.html">Points</a></li>
     <li><a href="pie_chart.html">chart</a></li>
-
-
-    <!-- Add more menu items here -->
   </ul>
 </nav>
 <div class="content">
-  <!-- <aside>
-    <h3>Menu</h3>
-    <ul>
-      <li><a href="#">Courses</a></li>
-      <li><a href="quizft.html">Quiz</a></li>
-      Add more menu items here -->
-    <!-- </ul>
-  </aside> -->
   <div class="fact-container">
     <h2>Fact of the Day</h2>
     <p class="fact-text" id="fact-text">Loading...</p>
     <button class="know-more-button" onclick="openMoreInfo()">Know More</button>
   </div>
+  <aside class="saving-goals-container">
+    <h2>Saving Goals</h2>
+    <form class="saving-goals-form" onsubmit="return false;">
+      <input class="saving-goals-input" type="text" placeholder="Enter your saving goal">
+      <input class="saving-goals-input" type="text" placeholder="Enter amount">
+      <button class="saving-goals-button" onclick="saveSavingGoal()">Save Goal</button>
+    </form>
+  </aside>
 </div>
 <footer>
 </footer>
@@ -215,7 +253,20 @@
 
   // Display a random financial fact when the page loads
   displayFact();
+  function saveSavingGoal() {
+    const savingGoalInput = document.querySelector('.saving-goals-input');
+    const savingGoal = savingGoalInput.value.trim();
+
+    if (savingGoal) {
+      // Implement your saving goal saving logic here
+      console.log('Saving goal:', savingGoal);
+      alert('Saving goal saved successfully!');
+    } else {
+      alert('Please enter a saving goal.');
+    }
+  }
 </script>
 </body>
 </html>
+
 
