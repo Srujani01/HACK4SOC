@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    select {
+      margin-bottom: 20px;
+    }
+
+    #studentOptions {
+      display: none;
+    }
+
+    #familyOptions {
+      display: none;
+    }
+
+    #output {
+      margin-top: 20px;
+    }
+  </style>
+  <title>Insurance and Scholarship Options</title>
+</head>
+<body>
+
+  <label for="choose">Choose between Student and Family:</label>
+  <select id="choose" onchange="showOptions()">
+    <option value="none">Select</option>
+    <option value="student">Student</option>
+    <option value="family">Family</option>
+  </select>
+
+  <div id="studentOptions">
+    <label for="studentOptionsDropdown">Choose Student Option:</label>
+    <select id="studentOptionsDropdown" onchange="showOutput('student')">
+      <option value="none">Select</option>
+      <option value="health">Health</option>
+      <option value="scholarship">Scholarship</option>
+    </select>
+  </div>
+
+  <div id="familyOptions">
+    <label for="familyOptionsDropdown">Choose Family Insurance Option:</label>
+    <select id="familyOptionsDropdown" onchange="showOutput('family')">
+      <option value="none">Select</option>
+      <option value="life">Life Insurance</option>
+      <option value="health">Health Insurance</option>
+      <option value="home">Home Insurance</option>
+      <option value="accidental">Accidental Death/Disability</option>
+    </select>
+  </div>
+
+  <div id="output"></div>
+
+  <script>
+    function showOptions() {
+      var choose = document.getElementById("choose").value;
+      var studentOptionsDiv = document.getElementById("studentOptions");
+      var familyOptionsDiv = document.getElementById("familyOptions");
+
+      if (choose === "student") {
+        studentOptionsDiv.style.display = "block";
+        familyOptionsDiv.style.display = "none";
+      } else if (choose === "family") {
+        studentOptionsDiv.style.display = "none";
+        familyOptionsDiv.style.display = "block";
+      } else {
+        studentOptionsDiv.style.display = "none";
+        familyOptionsDiv.style.display = "none";
+        showOutput();
+      }
+    }
+
+    function showOutput(optionType) {
+      var outputDiv = document.getElementById("output");
+      var outputText = "";
+
+      if (optionType === 'student') {
+        var studentOptions = document.getElementById("studentOptionsDropdown").value;
+        
+        if (studentOptions === "health") {
+          outputText = "<p>Student Health Options:</p><ul>" +
+            "<li>National Vidyarthi Mediclaim</li>" +
+            "<li>Aditya Birla General Insurance (for group)</li>" +
+            "</ul>";
+        } else if (studentOptions === "scholarship") {
+          outputText = "<p>Student Scholarship Options:</p><ul>" +
+            "<li>National Scholarship Portal (NSP)</li>" +
+            "<li>Means-Based Scholarships</li>" +
+            "<li>National Means-Cum-Merit Scholarship (NMMS)</li>" +
+            "<li>Dr. Abdul Kalam Scholarship for Meritorious Students</li>" +
+            "<li>State-Specific Scholarships</li>" +
+            "<li>Section 80E: Maximum Deduction</li>" +
+            "</ul>";
+        }
+      } else if (optionType === 'family') {
+        var familyOptions = document.getElementById("familyOptionsDropdown").value;
+
+        if (familyOptions === "life") {
+          outputText = "<p>Family Life Insurance Options:</p><ul>" +
+            "<li>Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)</li>" +
+            "</ul>";
+        } else if (familyOptions === "health") {
+          outputText = "<p>Family Health Insurance Options:</p><ul>" +
+            "<li>Section 80D: Up to INR 25,000 for health insurance premiums paid for self, spouse, and children.</li>" +
+            "<li>Section 80DD: For medical treatment, rehabilitation, or insurance premium for a dependent with a disability.</li>" +
+            "<li>Section 80DDB: For expenses on medical treatment of specified diseases for self or dependents.</li>" +
+            "</ul>";
+        } else if (familyOptions === "home") {
+          outputText = "<p>Family Home Insurance Options:</p><ul>" +
+            "<li>Section 24(b): Maximum Deduction  Up to INR 2 lakh per financial year.</li>" +
+            "<li>Section 10(14)  (House Rent Allowance): Eligible Expenses - Rent paid for accommodation.</li>" +
+            "</ul>";
+        } else if (familyOptions === "accidental") {
+          outputText = "<p>Family Accidental Options:</p><ul>" +
+            "<li>Pradhan Mantri Suraksha Bima Yojana (PMSBY)</li>" +
+            "<li>National Family Benefit Scheme (NFBS)</li>" +
+            "</ul>";
+        }
+      }
+
+      outputDiv.innerHTML = outputText;
+    }
+  </script>
+
+</body>
+</html>
