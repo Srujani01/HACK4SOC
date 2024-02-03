@@ -51,11 +51,11 @@
             margin-top: 20px;
         }
         .correct-answer {
-            color: green;
+            color: rgb(101, 247, 101);
         }
 
         .incorrect-answer {
-            color: red;
+            color: rgb(249, 86, 86);
         }
     </style>
 </head>
@@ -69,8 +69,9 @@
     </div>
 
     <script>
+        // Array of all questions for the quiz
         const allQuestions = [
-            {
+        {
                 question: "What does 'EMI' stand for in finance?",
                 options: ["Equated Monthly Installment", "Extra Monetary Investment", "Emergency Money Issuance", "Effective Market Index"],
                 correctAnswer: "Equated Monthly Installment"
@@ -270,11 +271,10 @@
         options: ["Section 80D", "Section 80DD", "Section 80DDB", "Section 80E"],
         correctAnswer: "Section 80DD"
     }
+            // Array of question objects with properties: question, options, and correctAnswer
         ];
 
-        let currentQuestionIndex = 0;
-        let score = 0;
-
+        // Randomizes questions for the quiz by selecting 10 random questions from allQuestions array
         function randomizeQuestions(allQuestions) {
             const selectedQuestions = [];
             for (let i = 0; i < 10; i++) {
@@ -285,8 +285,12 @@
             return selectedQuestions;
         }
 
+        // Stores the selected randomized questions
         const questions = randomizeQuestions(allQuestions);
+        let currentQuestionIndex = 0;
+        let score = 0;
 
+        // Loads the current question and its options onto the quiz container
         function loadQuestion() {
             const currentQuestion = questions[currentQuestionIndex];
             document.getElementById("question").innerText = currentQuestion.question;
@@ -297,38 +301,12 @@
             currentQuestion.options.forEach(option => {
                 const button = document.createElement("button");
                 button.innerText = option;
-                button.onclick = () => checkAnswer(option);
+                button.onclick = () => checkAnswer(option); // Calls checkAnswer function when clicked
                 optionsContainer.appendChild(button);
             });
         }
 
-        function checkAnswer(selectedOption) {
-            const currentQuestion = questions[currentQuestionIndex];
-            if (selectedOption === currentQuestion.correctAnswer) {
-                score++;
-            }
-
-            currentQuestionIndex++;
-
-            if (currentQuestionIndex < questions.length) {
-                loadQuestion();
-            } else {
-                displayResult();
-            }
-        }
-
-        function displayResult() {
-            const resultContainer = document.getElementById("quiz-container");
-            resultContainer.innerHTML = `<div id="result">Your score: ${score} / ${questions.length}</div>`;
-        }
-
-
-        function nextQuestion() {
-            loadQuestion();
-        }
-
-        // Initial load
-        loadQuestion();
+        // Checks the selected answer against the correct answer and displays the result
         function checkAnswer(selectedOption) {
             const currentQuestion = questions[currentQuestionIndex];
             const isCorrect = selectedOption === currentQuestion.correctAnswer;
@@ -340,12 +318,14 @@
             const optionsContainer = document.getElementById("options");
             const buttons = optionsContainer.getElementsByTagName("button");
 
+            // Disables all buttons after user answers
             for (const button of buttons) {
-                button.disabled = true; // Disable buttons after user answers
+                button.disabled = true;
             }
 
             const resultContainer = document.getElementById("result");
 
+            // Displays whether the answer is correct or incorrect
             if (isCorrect) {
                 resultContainer.innerHTML = `<div class="correct-answer">Correct! The answer is ${currentQuestion.correctAnswer}</div>`;
             } else {
@@ -354,18 +334,42 @@
 
             currentQuestionIndex++;
 
+            // Loads the next question after a brief delay or displays result if all questions are answered
             if (currentQuestionIndex < questions.length) {
                 setTimeout(() => {
                     loadQuestion();
-                    resultContainer.innerHTML = ''; // Clear result after a brief delay
+                    resultContainer.innerHTML = ''; // Clears result after a brief delay
                     for (const button of buttons) {
-                        button.disabled = false; // Enable buttons for the next question
+                        button.disabled = false; // Enables buttons for the next question
                     }
-                }, 1500); // Wait for 1.5 seconds before loading the next question
+                }, 1500); // Waits for 1.5 seconds before loading the next question
             } else {
                 displayResult();
             }
         }
+
+        // Displays the final quiz result and updates the points
+        function displayResult() {
+            const resultContainer = document.getElementById("quiz-container");
+            resultContainer.innerHTML = `<div id="result">Your score: ${score} / ${questions.length}</div>`;
+
+            // Updates points in localStorage or navigates to points page
+            handleQuizCompletion(score);
+        }
+
+        // Navigates to the points page and updates points in localStorage
+        function handleQuizCompletion(score) {
+            // Update points in localStorage
+            const currentPoints = parseInt(localStorage.getItem('points')) || 0;
+            const updatedPoints = currentPoints + score;
+            localStorage.setItem('points', updatedPoints.toString());
+            
+            // Redirect to points.html
+            window.location.href = 'points.html';
+        }
+
+        // Loads the first question when the page loads
+        loadQuestion();
     </script>
 </body>
 
