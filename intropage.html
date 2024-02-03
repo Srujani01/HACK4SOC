@@ -10,12 +10,12 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color:  #85dcb8;
   }
 
   header {
-    background-color: #333;
-    color: #fff;
+    background-color: #ffffff;
+    color: #000000;
     padding: 10px;
     text-align: center;
     position: relative;
@@ -32,7 +32,7 @@
   }
 
   .top-links a {
-    color: #fff;
+    color: #050505;
     text-decoration: none;
     margin-left: 10px;
   }
@@ -41,24 +41,24 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    color: #fff;
+    color: #000000;
     font-size: 24px;
     cursor: pointer;
   }
 
-  nav {
-    background-color: #f4f4f4;
+  .button-container {
+    background-color: #fdfdfd;
     padding: 10px;
     display: none;
   }
 
-  nav ul {
+  .button-container ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
 
-  nav ul li {
+  .button-container ul li {
     display: inline;
     margin-right: 20px;
   }
@@ -179,14 +179,12 @@
 
   </div>
 </header>
-<nav>
-  <ul>
-    <li><a href="courses.html">Courses</a></li>
-    <li><a href="quizft.html">Quiz</a></li>
-    <li><a href="points.html">Points</a></li>
-    <li><a href="pie_chart.html">chart</a></li>
-  </ul>
-</nav>
+<div class="button-container">
+  <button onclick="location.href='courses.html'">Courses</button>
+  <button onclick="location.href='quizft.html'">Quiz</button>
+  <button onclick="location.href='points.html'">Points</button>
+  <button onclick="location.href='pie_chart.html'">Chart</button>
+</div>
 <div class="content">
   <div class="fact-container">
     <h2>Fact of the Day</h2>
@@ -207,7 +205,7 @@
 
 <script>
   function toggleMenu() {
-    const navMenu = document.querySelector('nav');
+    const navMenu = document.querySelector('.button-container');
     navMenu.style.display = navMenu.style.display === 'block' ? 'none' : 'block';
   }
 
